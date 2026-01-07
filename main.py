@@ -19,6 +19,7 @@ class MainWindow(QMainWindow):
         self.ticker_input = QLineEdit()
         self.ticker_input.setPlaceholderText("Enter Ticker (e.g., AAPL)")
         self.analyze_btn = QPushButton("Analyze Stock")
+        self.analyze_btn.clicked.connect(self.start_analysis)
         
         input_layout.addWidget(self.ticker_input)
         input_layout.addWidget(self.analyze_btn)
@@ -35,6 +36,20 @@ class MainWindow(QMainWindow):
         container = QWidget()
         container.setLayout(layout)
         self.setCentralWidget(container)
+        
+    def start_analysis(self):
+        ticker = self.ticker_input.text().upper().strip()
+        
+        # Check if input is valid
+        valid, msg = valid_ticker(ticker)
+        if not valid:
+            self.status_label.setText(f"Error: {msg}")
+            return
+        
+        self.result_display.clear()
+        self.status_label.setText("Loading...")
+        self.analyze_btn.setEnabled(False)
+        
 
 app = QApplication(sys.argv)
 window = MainWindow()

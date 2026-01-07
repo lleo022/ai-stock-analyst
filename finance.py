@@ -33,5 +33,5 @@ def valid_format(ticker_name):
 def ticker_exists(ticker_name):
     # checks for a ticker's history in the past day
     ticker = yf.Ticker(ticker_name)
-    hist = ticker.hist(period="1d")
-    return not hist.empty()
+    hist = ticker.history(period="1d")
+    return not hist.empty
