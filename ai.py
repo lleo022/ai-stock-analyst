@@ -28,7 +28,8 @@ Ticker: TSLA, P/E: 75, 52wk_High: 290, Current: 150
 def get_ai_analysis(ticker, data):
     """Sends stock data to Gemini for analysis."""
     prompt = f"""
-    You are a professional stock analyst. Your response will be based on the following pattern:\n{FEW_SHOT_EXAMPLES}\n
+    You are a professional stock analyst. 
+    You will format your response based on the following patterns:\n{FEW_SHOT_EXAMPLES}\n
     Analyze the following data for {ticker} ({data['name']} 
     - Current Price: ${data['current_price']}
     - Forward P/E Ratio: {data['pe_ratio']}
